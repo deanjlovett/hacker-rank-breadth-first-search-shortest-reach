@@ -27,10 +27,13 @@ function readLine() {
  *
  * The function is expected to return an INTEGER_ARRAY.
  * The function accepts following parameters:
- *  1. INTEGER n
- *  2. INTEGER m
+ *  1. INTEGER n        nodes
+ *  2. INTEGER m        edges
  *  3. 2D_INTEGER_ARRAY edges
- *  4. INTEGER s
+ *  4. INTEGER s        starting node
+ * 
+ *  returns array of length to reach node from starting node.
+ *  every edge counts as 6 (six)
  */
 
 function bfs(n, m, edges, s) {
