@@ -35,13 +35,19 @@ function readLine() {
 
 function bfs(n, m, edges, s) {
     // Write your code here
+    console.log(`function bfs(n:${n}, m:${m}, edges, s:${s}) {`);
+
     console.log('========================');
 
     console.log('.   nodes, n:',n);
     console.log('.   edges, m:',m);
-    console.log('arr of edges:');
-    console.log(edges);
     console.log('start, s:',s);
+    console.log('array of edges:');
+    console.log('[');
+    edges.forEach(e=>{
+        console.log('  [',e[0],',',e[1],']');
+    });
+    console.log(']');
     
     let myMap = {};
     let mySet = new Set();
@@ -60,11 +66,11 @@ function bfs(n, m, edges, s) {
     for(let i=1; i<=n; ++i){
         console.log('loop, i:',i)
         if( i === s) {
-            console.log(`  i:${i} == s:${s}`);
+            console.log(`  i:${i} == s:${s}, skip, continue`);
             continue;
         }
         if( ! mySet.has(i) ){
-            console.log(`  i:${i} not in set ${myList}`);
+            console.log(`  i:${i} not in set ${myList}, push(-1), continue`);
 
             ret.push(-1);
             continue;
@@ -90,12 +96,26 @@ function bfs(n, m, edges, s) {
             ret.push(-1)
         }
     }
+    // console.log('------------------------');
+    // console.log(ret);
     console.log('========================');
     return ret;
 }
 
 function main() {
-    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+    let output_path = process.env.OUTPUT_PATH
+    if( output_path === undefined ){
+        output_path = 'output.txt'
+        output_path = 'output.txt'
+    }
+    const ws = fs.createWriteStream(output_path);
+
+    // const ws = process.env.OUTPUT_PATH === undefined ? 
+    //     process.stdout.fd :
+    //     fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    // original
+    // const ws = fs.createWriteStream(process.env.OUTPUT_PATH); 
 
     const q = parseInt(readLine().trim(), 10);
 
@@ -117,7 +137,12 @@ function main() {
         const result = bfs(n, m, edges, s);
 
         ws.write(result.join(' ') + '\n');
-    }
 
+        if( output_path === 'output.txt'){
+            console.log('result:');
+            console.log(result);
+            console.log();
+        }
+    }
     ws.end();
 }
