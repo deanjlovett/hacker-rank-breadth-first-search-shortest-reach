@@ -2,13 +2,24 @@
 find the shortest reach
 
 ```
+First round:
+test case 0: passed
 test case 1: timed out
 test case 2: timed out
 test case 3: failed
 test case 4: failed
 test case 5: timed out
 test case 6: timed out
+test case 7: passed
+
+Second round:
 test case 0: passed
+test case 1: passed
+test case 2: passed
+test case 3: passed
+test case 4: passed
+test case 5: Run Time Error
+test case 6: passed
 test case 7: passed
 
 test case 0:
