@@ -68,7 +68,7 @@ function dlogsline(){
 
 function bfs(n, m, edges, s) {
     // Write your code here
-    
+
     let myMap = new Map(); // collection of nodes
     let myNodeSet = new Set(); // list of node keys, to be worked
     edges.forEach((e,i,arr)=>{
@@ -77,15 +77,13 @@ function bfs(n, m, edges, s) {
         myNodeSet.add(k);
         myNodeSet.add(v);
     });
-    if( ! myNodeSet.has(s) ){
-        return new Array(n).fill(-1);
+    if( ! myNodeSet.has(s) ){ // is the starting node in the node list
+        return new Array(n-1).fill(-1);
     }
 
     edges.forEach((e,i,arr)=>{
         let k = e[0];
         let v = e[1];
-        // myNodeSet.add(k);
-        // myNodeSet.add(v);
         for(let j=0;j<2;++j) {
             if( myMap.has(k) ){
                 let it = myMap.get(k);
@@ -131,6 +129,7 @@ function bfs(n, m, edges, s) {
             let echild = myMap.get(e);
             if( echild.chainset.has(w.key)) return;
             echild.chain.push( w.key );
+            echild.chainset.add( w.key );
             if( echild.dist == -1 ) echild.dist = w.dist + 1;
             if( !myNodeSet.has(e) ) return;
             wq.push(echild);
@@ -176,7 +175,7 @@ function bfs_with_debug(n, m, edges, s) {
         myNodeSet.add(v);
     });
     if( ! myNodeSet.has(s) ){
-        return new Array(n).fill(-1);
+        return new Array(n-1).fill(-1);
     }
 
     // edges.forEach((e,i,arr)=>{
@@ -229,7 +228,7 @@ function bfs_with_debug(n, m, edges, s) {
     clog(`myMap.has(s) === ${myMap.has(s)}`)
     if( ! myMap.has(s) ){
         clog(`*** s:${s} not in myMap **`);
-        return new Array(n).fill(-1);
+        return new Array(n-1).fill(-1);
     }
     let start = myMap.get(s);
     start.isTop = true;
@@ -269,6 +268,7 @@ function bfs_with_debug(n, m, edges, s) {
             let echild = myMap.get(e);
             if( echild.chainset.has(w.key)) return;
             echild.chain.push( w.key );
+            echild.chainset.add( w.key );
             if( echild.dist == -1 ) echild.dist = w.dist + 1;
             if( !myNodeSet.has(e) ) return;
             wq.push(echild);
@@ -338,8 +338,8 @@ function main() {
 
         const s = parseInt(readLine().trim(), 10);
 
-        const result = bfs_with_debug(n, m, edges, s);
-        // const result = bfs(n, m, edges, s);
+        // const result = bfs_with_debug(n, m, edges, s);
+        const result = bfs(n, m, edges, s);
 
         ws.write(result.join(' ') + '\n');
 
